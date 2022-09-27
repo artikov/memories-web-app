@@ -1,0 +1,18 @@
+{
+    "users": [
+        {
+            "id": 42, 
+            "value": "+55 84 91234-4321", 
+            "monthyPrice": "0.03", 
+            "setupPrice": "3.40", 
+            "currency": "U$" 
+        },
+        {
+            "id": 52, 
+            "value": "+66 91234-4321", 
+            "monthyPrice": "0.3", 
+            "setupPrice": "3.41", 
+            "currency": "U$" 
+        }
+    ]
+}
