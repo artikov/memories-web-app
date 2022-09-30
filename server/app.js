@@ -2,11 +2,14 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
 import postsRoutes from './routes/posts.js'
 
 // APP INITIALIZATION
 const app = express()
+
+dotenv.config({path:'config.env'})
 
 app.use(bodyParser.json({limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
@@ -15,8 +18,7 @@ app.use(cors())
 app.use('/posts', postsRoutes)
 
 // MONGODB CONFIGURATION
-// TODO: make env 
-// CONNECTION URL GOES HERE
+const CONNECTION_URL = process.env.MONGO_URI
 const PORT = process.env.PORT || 5000
 
 mongoose.connect(CONNECTION_URL)
