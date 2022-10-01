@@ -17,6 +17,10 @@ app.use(cors())
 
 app.use('/posts', postsRoutes)
 
+app.use('/', (req, res) => {
+    res.send('Welcome to Memories API')
+})
+
 // MONGODB CONFIGURATION
 const CONNECTION_URL = process.env.MONGO_URI
 const PORT = process.env.PORT || 5000
