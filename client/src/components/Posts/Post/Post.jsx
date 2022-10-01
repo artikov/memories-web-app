@@ -32,20 +32,20 @@ const Post = ({ post, setCurrentId }) => {
             <div className={classes.details}> 
                 <Typography variant='body2' color='textSecondary'>{post.tags.map((tag)=> `#${tag} `)}</Typography>
             </div>
+
+            <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+            
             <CardContent>
-                <div className={classes.title}> 
-                    <Typography variant='h5' gutterBottom>{post.title}</Typography>
-                </div>
-                <div> 
-                    <Typography variant='body1' gutterBottom>{post.message}</Typography>
-                </div>
+                    <Typography variant='body2' color='textSecondary' component="p" gutterBottom>{post.message}</Typography>
             </CardContent>
+
             <CardActions className={classes.cardActions}>
                 <Button size="small" color="primary" onClick={()=> dispatch(likePost(post._id))}>
                     <ThumbUpAltIcon fontSize="small" />
-                    Like 
+                    &nbsp; Like &nbsp;
                     {post.likeCount}
                 </Button>
+
                 <Button size="small" color="primary" onClick={()=> dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small" />
                     Delete
