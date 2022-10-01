@@ -29,7 +29,10 @@ const Post = ({ post, setCurrentId }) => {
             </div>
             <CardContent>
                 <div className={classes.title}> 
-                    <Typography variant='h5' gutterBottom>{post.message}</Typography>
+                    <Typography variant='h5' gutterBottom>{post.title}</Typography>
+                </div>
+                <div> 
+                    <Typography variant='body1' gutterBottom>{post.message}</Typography>
                 </div>
             </CardContent>
             <CardActions className={classes.cardActions}>
