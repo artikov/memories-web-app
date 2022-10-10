@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField} from '@material-ui/core'
+import { Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useGoogleLogin } from '@react-oauth/google';
+import {useDispatch} from 'react-redux'
 
 import Icon from './icon'
 import Input from './Input'
@@ -12,6 +13,7 @@ const Auth = () => {
     const classes = useStyles()
     const [showPassword, setShowPassword] = useState(false)
     const [isSignup, setIsSignup] = useState(false)
+    const dispatch = useDispatch()
 
     const handleSubmit = () => {
 
@@ -30,9 +32,23 @@ const Auth = () => {
         handleShowPassword(false)
     }
 
-    const googleSuccess = (res) => {
-        console.log(res)
+    const googleSuccess = async (res) => {
+        console.log(res.profileObj)
+        const result = res?.profileObj  // ?. used to avoid error if value is not present
+        const token = res?.access_token
+
+        try {
+            dispatch({
+                type: "AUTH",
+                data: {result, token}
+            })
+        } catch(error) {
+            console.log(error)
+        }
+
     }
+
+
     const googleFailure = (error) => {
         console.log(error)
         console.log("Google sign in was unsuccessful. Try again later...")
@@ -40,7 +56,7 @@ const Auth = () => {
 
     const login = useGoogleLogin({
         onSuccess: googleSuccess,
-        onError: googleFailure
+        onError: googleFailure,
     })
 
     return (
@@ -77,26 +93,8 @@ const Auth = () => {
                     >
                         Google Sign In
                     </Button>
-                    {/* <GoogleLogin 
-                        // clientId={GOOGLE_ID}
-                        // render={(renderProps)=>(
-                        //     <Button 
-                        //         className={classes.googleButton} 
-                        //         color='primary' 
-                        //         fullWidth 
-                        //         onClick={renderProps.onClick}
-                        //         disabled={renderProps.disabled}
-                        //         startIcon=<Icon />
-                        //         variant='contained'
-                        //     >
-                        //         Google Sign In
-                        //     </Button>
-                        // )}
-                        onSuccess={googleSuccess}
-                        onError={googleFailure}
-                        // cookiePolicy="single_host_origin"
-                    /> */}
-                    <Grid container justify="flex0end">
+
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>{
                                 isSignup ? "Already have an account? Sign In" : "Don't have an account? Sign Up"
