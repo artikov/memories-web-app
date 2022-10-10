@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
 import { Avatar, Button, Paper, Grid, Typography, Container} from '@material-ui/core'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-// import { useGoogleLogin } from '@react-oauth/google';
+
 import { GoogleLogin } from 'react-google-login';
 import {gapi} from 'gapi-script'
 
 import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 import Icon from './icon'
 import Input from './Input'
 
 import useStyles from './styles'
-import { useEffect } from 'react';
 
 const Auth = () => {
     const classes = useStyles()
     const [showPassword, setShowPassword] = useState(false)
     const [isSignup, setIsSignup] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // handle google oauth error
     useEffect(() => {
@@ -46,7 +48,6 @@ const Auth = () => {
     }
 
     const googleSuccess = async (res) => {
-        console.log(res)
         const result = res?.profileObj  // ?. used to avoid error if value is not present
         const token = res?.tokenObj
 
@@ -55,23 +56,17 @@ const Auth = () => {
                 type: "AUTH",
                 data: {result, token}
             })
+
+            navigate('/')
         } catch(error) {
             console.log(error)
         }
-
     }
-
 
     const googleFailure = (error) => {
         console.log(error)
         console.log("Google sign in was unsuccessful. Try again later...")
     }
-
-    // const login = useGoogleLogin({
-    //     onSuccess: googleSuccess,
-    //     onError: googleFailure,
-    // })
-
 
     return (
         <Container component="main" maxWidth="xs">
