@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-const SECRET = process.env.JWT_SECRET
+const SECRET = process.env.JWT_SECRET || 'test'
 
 const auth = async (req, res, next) => {
     try {

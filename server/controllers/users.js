@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 
 import User from '../models/user.js'
 
-const SECRET = process.env.JWT_SECRET
+const SECRET = process.env.JWT_SECRET || 'test'
 
 export const signin = async (req, res) => {
     const {email, password} = req.body
