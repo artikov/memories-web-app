@@ -41,6 +41,7 @@ const Post = ({ post, setCurrentId }) => {
                 <Typography variant="h6">{post.name}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
+            {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
             <div className={classes.overlay2}>
                 <Button 
                     style={{color: "white"}} 
@@ -49,6 +50,7 @@ const Post = ({ post, setCurrentId }) => {
                     <MoreHorizIcon fontSize='default' />
                 </Button>
             </div>
+            )}
             <div className={classes.details}> 
                 <Typography variant='body2' color='textSecondary'>{post.tags.map((tag)=> `#${tag} `)}</Typography>
             </div>
@@ -63,11 +65,12 @@ const Post = ({ post, setCurrentId }) => {
                 <Button size="small" color="primary" disabled={!user?.result} onClick={()=> dispatch(likePost(post._id))}>
                     <Likes />
                 </Button>
-
+                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
                 <Button size="small" color="primary" onClick={()=> dispatch(deletePost(post._id))}>
                     <DeleteIcon fontSize="small" />
                     Delete
                 </Button>
+                )}
 
             </CardActions>
         </Card>
