@@ -14,7 +14,6 @@ import useStyles from './styles'
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
-
     const user = JSON.parse(localStorage.getItem('profile'))
 
 
@@ -31,6 +30,7 @@ const Post = ({ post, setCurrentId }) => {
                     </>
                 )
         }
+
         return <><ThumbUpAltOutlinedIcon fontSize='small' />&nbsp;Like</>
     }
 
