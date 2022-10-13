@@ -7,6 +7,8 @@ const auth = async (req, res, next) => {
         const token = req.headers.authorization.split(" ")[1]
         const isCustomAuth = token.length < 500
 
+        // console.log(token)
+
 
         let decodedData
 

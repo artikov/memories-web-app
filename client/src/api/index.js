@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const API = axios.create({baseURL:'https://memories-artikov.herokuapp.com' })
+const API = axios.create({baseURL:'http://localhost:5000' })
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
-        if(typeof JSON.parse(localStorage.getItem('profile')).token === Object){
+        if(typeof JSON.parse(localStorage.getItem('profile')).token === 'object'){
             req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token.id_token}`
         } else {
             req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
