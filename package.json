@@ -2,11 +2,22 @@
   "name": "memories-web-app",
   "version": "1.0.0",
   "description": "Social Media Web application",
-  "main": "index.js",
+  "main": "app.js",
+	"type":"module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-		"build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+		"start": "nodemon server/app.js",
+    "build": "npm install --prefix server && npm install --prefix client && npm run build --prefix client"
   },
   "author": "Oybek Artikov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+		"bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jsonfile": "^6.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.2"
+  }
 }
